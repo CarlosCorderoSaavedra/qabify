@@ -5,6 +5,8 @@ import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
 import com.saucelabs.junit.SauceOnDemandTestWatcher;
 import com.saucelabs.saucerest.SauceREST;
+
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
@@ -82,10 +84,9 @@ public class AppiumTest implements SauceOnDemandSessionIdProvider {
         capabilities.setCapability("deviceName", "Android");
         capabilities.setCapability("platformVersion", "4.3");
         
-      //Add capabilities for android 6.0
-        capabilities.setCapability("appWaitPackage", "com.android.packageinstaller");
-        capabilities.setCapability("appWaitActivity", ".permission.ui.GrantPermissionsActivity");
-
+        //Android 6 permission
+        capabilities.setCapability("locationServicesAuthorized", true);
+        capabilities.setCapability("autoAcceptAlerts", true);
         
         // Set job name on Sauce Labs
         capabilities.setCapability("name", "Java Android tutorial " + date);
@@ -117,7 +118,9 @@ public class AppiumTest implements SauceOnDemandSessionIdProvider {
         sessionId = driver.getSessionId().toString();
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        
         Helpers.init(driver, serverAddress);
+        
     }
 
     /** Run after each test **/
