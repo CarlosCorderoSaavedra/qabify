@@ -81,7 +81,12 @@ public class AppiumTest implements SauceOnDemandSessionIdProvider {
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "Android");
         capabilities.setCapability("platformVersion", "4.3");
+        
+      //Add capabilities for android 6.0
+        capabilities.setCapability("appWaitPackage", "com.android.packageinstaller");
+        capabilities.setCapability("appWaitActivity", ".permission.ui.GrantPermissionsActivity");
 
+        
         // Set job name on Sauce Labs
         capabilities.setCapability("name", "Java Android tutorial " + date);
         String userDir = System.getProperty("user.dir");
@@ -106,6 +111,8 @@ public class AppiumTest implements SauceOnDemandSessionIdProvider {
             serverAddress = new URL("http://127.0.0.1:4723/wd/hub");
             driver = new AndroidDriver(serverAddress, capabilities);
         }
+        
+        
 
         sessionId = driver.getSessionId().toString();
 
