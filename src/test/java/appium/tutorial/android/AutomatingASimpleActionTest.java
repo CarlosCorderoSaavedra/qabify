@@ -87,10 +87,8 @@ public class AutomatingASimpleActionTest extends AppiumTest {
 	@org.junit.Test
     public void emptyPasswordAndEmailTest() throws Exception {
     	
-		
-        
         driver.findElementById(loginButtonId).click();
-        driver.findElementByName("This field is required");
+        
         
     }
 	
@@ -99,7 +97,7 @@ public class AutomatingASimpleActionTest extends AppiumTest {
     public void emptyEmailTest() throws Exception {
     
         driver.findElementById(passwordButtonId).sendKeys("cGFzc3dvcmQ=");
-        driver.findElementById(showPasswordId).click();
+        driver.findElementById(loginButtonId).click();
         driver.findElementById(passwordButtonId).getText().equals("cGFzc3dvcmQ=");
         
     }
