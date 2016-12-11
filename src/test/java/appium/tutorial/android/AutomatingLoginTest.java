@@ -56,7 +56,7 @@ public class AutomatingLoginTest extends AppiumTest {
         driver.findElementById(mailButtonId).sendKeys(userOneEmail);
         driver.findElementById(passwordButtonId).sendKeys(userOnePassword);
         driver.findElementById(showPasswordId).click();
-        driver.findElementById(passwordButtonId).getText().equals(userOnePassword);
+        driver.findElement(By.name(userOnePassword));
         
         
         
