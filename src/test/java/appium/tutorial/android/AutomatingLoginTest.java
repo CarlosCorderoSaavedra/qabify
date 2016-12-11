@@ -21,14 +21,17 @@ public class AutomatingLoginTest extends AppiumTest {
 	String showPasswordId = "com.cabify.qabify:id/text_input_password_toggle";
 	String tokenButtonId = "com.cabify.qabify:id/token_button";
 	String userLoggedId = "com.cabify.qabify:id/textView";
-	//String currentActivity = driver.currentActivity();
+	String userOnePassword = "password";
+	String userOneEmail = "user1@example.com";
+	String adminPassword = "nmT8bSVJepgWrryx";
+	String adminEmail = "admin@example.com";
     
 	@org.junit.Test
     public void checkUserOneTest() throws Exception {
     	
 		
-        driver.findElementById(mailButtonId).sendKeys("user1@example.com");
-        driver.findElementById(passwordButtonId).sendKeys("password");
+        driver.findElementById(mailButtonId).sendKeys("emailUserOne");
+        driver.findElementById(passwordButtonId).sendKeys(userOnePassword);
         driver.findElementById(loginButtonId).click();
         driver.findElementById(userLoggedId).getText().equals("Hi,User 1");
         
@@ -39,8 +42,8 @@ public class AutomatingLoginTest extends AppiumTest {
     	
     	
 			
-            driver.findElementById(mailButtonId).sendKeys("admin@example.com");
-            driver.findElementById(passwordButtonId).sendKeys("nmT8bSVJepgWrryx");
+            driver.findElementById(mailButtonId).sendKeys(adminEmail);
+            driver.findElementById(passwordButtonId).sendKeys(adminPassword);
             driver.findElementById(loginButtonId).click();
             driver.findElementById(userLoggedId).getText().equals("Hi, Admin");
             
@@ -50,10 +53,12 @@ public class AutomatingLoginTest extends AppiumTest {
     public void showPasswordTest() throws Exception {
     	
 		
-        driver.findElementById(mailButtonId).sendKeys("user1@example.com");
-        driver.findElementById(passwordButtonId).sendKeys("password");
+        driver.findElementById(mailButtonId).sendKeys(userOneEmail);
+        driver.findElementById(passwordButtonId).sendKeys(userOnePassword);
         driver.findElementById(showPasswordId).click();
-        driver.findElementById(passwordButtonId).getText().equals("password");
+        driver.findElementById(passwordButtonId).getText().equals(userOnePassword);
+        
+        
         
     }
 	
@@ -61,9 +66,10 @@ public class AutomatingLoginTest extends AppiumTest {
     public void emptyPasswordTest() throws Exception {
     	
 		String currentActivity = driver.currentActivity();
-        driver.findElementById(mailButtonId).sendKeys("user1@example.com");
+        driver.findElementById(mailButtonId).sendKeys(userOneEmail);
         driver.findElementById(loginButtonId).click();
         currentActivity.equals(driver.currentActivity());
+        
         	
         
     }
@@ -71,23 +77,28 @@ public class AutomatingLoginTest extends AppiumTest {
 	@org.junit.Test
     public void tooShortPasswordTest() throws Exception {
     	
-		
-        driver.findElementById(mailButtonId).sendKeys("user1@example.com");
+		String currentActivity = driver.currentActivity();
+        driver.findElementById(mailButtonId).sendKeys(userOneEmail);
         driver.findElementById(passwordButtonId).sendKeys("11=");
         driver.findElementById(loginButtonId).click();
-        driver.findElement(By.name("This password is too short"));
+        currentActivity.equals(driver.currentActivity());
+        if (driver.findElementById(tokenButtonId).isDisplayed()) {
+    	    throw new Exception("Oops! Impossible show token of invalid password.");
+    	  }
        
         
     }
 	
 	@org.junit.Test
-    public void invalidEmailTest() throws Exception {	
-		
+	public void invalidEmailTest() throws Exception
+	{
 		driver.findElementById(mailButtonId).sendKeys("user1example.com");
+        driver.findElementById(passwordButtonId).sendKeys(userOnePassword);
         driver.findElementById(loginButtonId).click();
-        driver.findElement(By.name("This email address is invalid"));
-        
-    }
+	  if (driver.findElementById(tokenButtonId).isDisplayed()) {
+	    throw new Exception("Oops! Impossible show token of invalid email.");
+	  }
+	}
 	
 	
 	@org.junit.Test
@@ -95,6 +106,9 @@ public class AutomatingLoginTest extends AppiumTest {
     	
         driver.findElementById(loginButtonId).click();
         driver.findElement(By.name("This field is required"));
+        if (driver.findElementById(tokenButtonId).isDisplayed()) {
+    	    throw new Exception("Oops! Impossible show token of invalid email or password.");
+    	  }
              
     }
 	
@@ -104,15 +118,17 @@ public class AutomatingLoginTest extends AppiumTest {
     
         driver.findElementById(passwordButtonId).sendKeys("cGFzc3dvcmQ=");
         driver.findElementById(loginButtonId).click();
-        driver.findElement(By.name("This field is required"));
+        if (driver.findElementById(tokenButtonId).isDisplayed()) {
+    	    throw new Exception("Oops! Impossible show token of invalid email.");
+    	  }
         
     }
 	
 	@org.junit.Test
 	public void checkTokenUserOneTest() throws Exception {
 		
-        driver.findElementById(mailButtonId).sendKeys("user1@example.com");
-        driver.findElementById(passwordButtonId).sendKeys("password");
+        driver.findElementById(mailButtonId).sendKeys(userOneEmail);
+        driver.findElementById(passwordButtonId).sendKeys(userOnePassword);
         driver.findElementById(loginButtonId).click();
         driver.findElementById(tokenButtonId).click();
         driver.findElement(By.name("abcdefghi"));
@@ -122,8 +138,8 @@ public class AutomatingLoginTest extends AppiumTest {
 	@org.junit.Test
 	public void checkTokenAdminTest() throws Exception {
 	
-        driver.findElementById(mailButtonId).sendKeys("admin@example.com");
-        driver.findElementById(passwordButtonId).sendKeys("nmT8bSVJepgWrryx");
+        driver.findElementById(mailButtonId).sendKeys(adminEmail);
+        driver.findElementById(passwordButtonId).sendKeys(adminPassword);
         driver.findElementById(loginButtonId).click();
         driver.findElementById(tokenButtonId).click();
         driver.findElement(By.name("123456789"));
