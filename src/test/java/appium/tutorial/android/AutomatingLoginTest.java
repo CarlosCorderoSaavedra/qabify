@@ -13,7 +13,7 @@ import java.util.List;
 
 import static appium.tutorial.android.util.Helpers.*;
 
-public class AutomatingASimpleActionTest extends AppiumTest {
+public class AutomatingLoginTest extends AppiumTest {
 
  	String mailButtonId = "com.cabify.qabify:id/email";
 	String passwordButtonId = "com.cabify.qabify:id/password";
@@ -21,7 +21,7 @@ public class AutomatingASimpleActionTest extends AppiumTest {
 	String showPasswordId = "com.cabify.qabify:id/text_input_password_toggle";
 	String tokenButtonId = "com.cabify.qabify:id/token_button";
 	String userLoggedId = "com.cabify.qabify:id/textView";
-	
+	//String currentActivity = driver.currentActivity();
     
 	@org.junit.Test
     public void checkUserOneTest() throws Exception {
@@ -60,10 +60,11 @@ public class AutomatingASimpleActionTest extends AppiumTest {
 	@org.junit.Test
     public void emptyPasswordTest() throws Exception {
     	
-		
+		String currentActivity = driver.currentActivity();
         driver.findElementById(mailButtonId).sendKeys("user1@example.com");
         driver.findElementById(loginButtonId).click();
-        driver.findElement(By.name("This password is incorrect"));
+        currentActivity.equals(driver.currentActivity());
+        	
         
     }
 	
@@ -120,7 +121,7 @@ public class AutomatingASimpleActionTest extends AppiumTest {
 	
 	@org.junit.Test
 	public void checkTokenAdminTest() throws Exception {
-		
+	
         driver.findElementById(mailButtonId).sendKeys("admin@example.com");
         driver.findElementById(passwordButtonId).sendKeys("nmT8bSVJepgWrryx");
         driver.findElementById(loginButtonId).click();
