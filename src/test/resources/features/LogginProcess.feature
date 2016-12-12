@@ -1,10 +1,8 @@
-@Smoke
-
+@smoke
 Feature: As a User I need to check the Admin user token
 
 Scenario: Check admin user token
 
-Given logged page
-When tap in the token button
-And the popup appears 
+Given User logged
+When show token 
 Then Compare the user token
