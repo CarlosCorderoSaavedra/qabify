@@ -22,5 +22,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Carlos/Downloads/cucumber-core-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Carlos/Downloads/cucumber-java-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Carlos/Downloads/cucumber-junit-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Carlos/Downloads/cucumber-jvm-deps-1.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Carlos/Downloads/gherkin-4.0.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
