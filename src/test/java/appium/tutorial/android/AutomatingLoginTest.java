@@ -29,130 +29,119 @@ public class AutomatingLoginTest extends AppiumTest {
 	String adminPassword = "nmT8bSVJepgWrryx";
 	String adminEmail = "admin@example.com";
 
-	
-	@org.junit.Test
 	@Given("User is on Signup screen")
-	public void checkSignupScreen() throws Exception {
+	public void check_Signup_Screen() throws Exception {
 
 		driver.findElement(By.name("SIGN IN OR REGISTER"));
 
 	}
 
-	@org.junit.Test
 	@When("User enter user1 details")
-	public void addUserOneInfo() throws Exception {
+	public void add_UserOne_Info() throws Exception {
 
 		driver.findElementById(mailButtonId).sendKeys(userOneEmail);
 		driver.findElementById(passwordButtonId).sendKeys(userOnePassword);
 
 	}
 
-	@org.junit.Test
 	@When("User enter admin details")
-	public void addAdminInfo() throws Exception {
+	public void add_Admin_Info() throws Exception {
 
 		driver.findElementById(mailButtonId).sendKeys(adminEmail);
 		driver.findElementById(passwordButtonId).sendKeys(adminPassword);
 
 	}
 
-	@org.junit.Test
 	@When("User login")
-	public void loginAction() throws Exception {
+	public void login_Action() throws Exception {
 		driver.findElementById(loginButtonId).click();
 
 	}
 
-	@org.junit.Test
 	@Then("Login user1 successfull")
-	public void loginUserOneSucess() throws Exception {
+	public void login_UserOne_Sucess() throws Exception {
 		driver.findElementById(userLoggedId).getText().equals("Hi, User1");
 
 	}
 
-	@org.junit.Test
 	@Then("Login admin successfull")
-	public void loginAdminSucess() throws Exception {
+	public void login_Admin_Sucess() throws Exception {
 		driver.findElementById(userLoggedId).getText().equals("Hi, Admin");
 
 	}
 
-	@org.junit.Test
 	@When("User enter invalid email")
-	public void enterInvalidEmail() throws Exception {
+	public void enter_Invalid_Email() throws Exception {
 
 		driver.findElementById(mailButtonId).sendKeys("user1example.com");
 		driver.findElementById(passwordButtonId).sendKeys(userOnePassword);
 	}
 
-	@org.junit.Test
 	@Then("Login validation error")
-	public void invalidEmailCheck() throws Exception {
+	public void invalid_Email_Check() throws Exception {
 		if (driver.findElementById(tokenButtonId).isDisplayed()) {
 			throw new Exception("Oops! Impossible login .");
 		}
 	}
 
-	@org.junit.Test
 	@When("User enter password")
-	public void emptyEmail() throws Exception {
+	public void empty_Email() throws Exception {
 
 		driver.findElementById(passwordButtonId).sendKeys(userOnePassword);
 	}
 
-	@org.junit.Test
 	@When("User enter user1 email")
-	public void enterUserOneEmail() throws Exception {
+	public void enter_UserOne_Email() throws Exception {
 
 		driver.findElementById(mailButtonId).sendKeys(userOneEmail);
 	}
 
 	@When("User show password")
-	public void showPassword() throws Exception {
+	public void show_Password() throws Exception {
 
 		driver.findElementById(showPasswordId).click();
 	}
 
 	@Then("The password is displayed")
-	public void checkDisplayedPassword() throws Exception {
+	public void check_Displayed_Password() throws Exception {
 
 		driver.findElement(By.name(userOnePassword));
 	}
 
 	@When("User enter short password")
-	public void enterTooShortPassword() throws Exception {
+	public void enter_Too_Short_Password() throws Exception {
 
 		driver.findElementById(passwordButtonId).sendKeys("11=");
 	}
 
 	@Given("User1 logged")
-	public void userLogged() throws Exception {
-		addUserOneInfo();
-		loginAction();
+	public void user_Logged() throws Exception {
+		add_UserOne_Info();
+		login_Action();
 
 	}
 
 	@Given("Admin logged")
-	public void adminLogged() throws Exception {
-		addAdminInfo();
-		loginAction();
+	public void admin_Logged() throws Exception {
+		add_Admin_Info();
+		login_Action();
 
 	}
 
 	@When("User show token")
-	public void userShowToken() throws Exception {
+	public void user_Show_Token() throws Exception {
 		driver.findElementById(tokenButtonId).click();
 
 	}
 
 	@Then("Admin token its the same")
-	public void compareTokenAdmin() throws Exception {
+	public void compare_Token_Admin() throws Exception {
 		driver.findElement(By.name("123456789"));
 
 	}
 
 	@Then("User1 token its the same")
-	public void compareTokenUserOne() throws Exception {
+	public void compare_Token_UserOne() throws Exception {
 		driver.findElement(By.name("abcdefghi"));
 
 	}
