@@ -1,20 +1,17 @@
 package appium.tutorial.android;
 
 import appium.tutorial.android.util.AppiumTest;
+import cucumber.api.CucumberOptions;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.appium.java_client.MobileBy;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
-
-import java.util.ArrayList;
-import java.util.List;
+import cucumber.api.junit.Cucumber;
 
 import static appium.tutorial.android.util.Helpers.*;
+
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+
 
 public class AutomatingLoginTest extends AppiumTest {
 

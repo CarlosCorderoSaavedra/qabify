@@ -1,6 +1,9 @@
 package appium.tutorial.android.util;
 
 import appium.tutorial.android.page.HomePage;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
 import com.saucelabs.junit.SauceOnDemandTestWatcher;
@@ -15,6 +18,7 @@ import org.junit.Rule;
 import org.junit.rules.TestRule;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -26,6 +30,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static appium.tutorial.android.util.Helpers.driver;
+
 
 public class AppiumTest implements SauceOnDemandSessionIdProvider {
 

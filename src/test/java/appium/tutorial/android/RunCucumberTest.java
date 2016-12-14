@@ -6,6 +6,8 @@ import cucumber.api.junit.Cucumber;
 import cucumber.api.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = "json:target/report.json")
-public class RunCukesTest {
+@CucumberOptions(strict = true,  features = {
+        "src/test/resources/features/",
+    },monochrome=true)
+public class RunCucumberTest {
 }
